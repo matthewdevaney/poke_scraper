@@ -31,12 +31,11 @@ for current_pokemon in pokemon_list:
     sub_dict['id'] = poke_id
     sub_dict['name'] = soup.find('div', {'class': 'pokedex-pokemon-pagination-title'}).get_text().strip().split('\n')[0]
     sub_dict['description'] = soup.find_all('div', {'class': 'version-descriptions active'})[0].p.get_text()\
-        .replace('\n', ' ').strip()
+        .replace('\n', ' ').strip().replace('—', '-').replace('é', 'e')
 
     poke_attributes = soup.find_all('span', {'class': 'attribute-value'})
     sub_dict['height'] = poke_attributes[0].get_text()
     sub_dict['weight'] = poke_attributes[1].get_text()
-    sub_dict['gender'] = poke_attributes[2].get_text()
     sub_dict['category'] = poke_attributes[3].get_text()
     sub_dict['overgrow'] = poke_attributes[4].get_text()
 
