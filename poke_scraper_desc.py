@@ -26,7 +26,8 @@ for current_pokemon in pokemon_list:
 
     # scrape pokemon profile
     poke_id = int(soup.find('div', {'class': 'pokedex-pokemon-pagination-title'}).get_text().strip().split('\n')[1]
-                                                                                 .strip().strip('#0').strip('#00'))
+                                                                                 .strip().replace('#', '')
+                                                                                 .replace('#0', '').replace('#00', ''))
     sub_dict['id'] = poke_id
     sub_dict['name'] = soup.find('div', {'class': 'pokedex-pokemon-pagination-title'}).get_text().strip().split('\n')[0]
     sub_dict['description'] = soup.find_all('div', {'class': 'version-descriptions active'})[0].p.get_text()\
